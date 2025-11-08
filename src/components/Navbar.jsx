@@ -55,8 +55,8 @@ const Navbar = ({
           Gokul<span className={`${currentTheme.accentText}`}>.dev</span>
         </motion.h1>
 
-        {/* Desktop Navigation */}
-        <ul className="hidden md:flex gap-8 font-medium">
+        {/* Desktop Navigation - centered */}
+        <ul className="hidden md:flex gap-8 font-medium absolute left-1/2 transform -translate-x-1/2 z-20">
           {navLinks.map((link, idx) => (
             <li
               key={link.id}
@@ -77,21 +77,44 @@ const Navbar = ({
           ))}
         </ul>
 
-        {/* Color Picker (Desktop) */}
-        <div className="hidden md:flex gap-2 ml-6">
-          {colors.map((color) => (
-            <button
-              key={color.class}
-              onClick={() => chooseColor(color.class)}
-              className={`w-6 h-6 rounded-full border-2 ${
-                selectedColor === color.class
-                  ? `${color.ring} ring-1 scale-110`
-                  : "hover:scale-105"
-              } ${color.class} transition-all duration-300`}
-              title={`Set ${color.name} theme`}
-              aria-label={`${color.name} theme`}
-            />
-          ))}
+        {/* Right side (Desktop): color picker + CTAs */}
+        <div className="hidden md:flex items-center gap-5 ml-6">
+
+          <a
+            href="/Resume/Gokul_Palanisamy_Resume.pdf"
+            download
+            className={`hidden lg:inline-block px-4 py-2 rounded-md font-medium transition ${currentTheme.buttonOutline}`}
+            aria-label="Download Resume"
+            title="Download Resume"
+          >
+            Resume
+          </a>
+
+          <button
+            onClick={() => {
+              const idx = navLinks.findIndex((n) => n.id === "contact");
+              onSectionChange(idx === -1 ? navLinks.length - 1 : idx);
+            }}
+            className={`px-4 py-2 rounded-md font-medium transition ${currentTheme.button}`}
+            aria-label="Contact"
+          >
+            Contact
+          </button>
+          <div className="flex gap-2">
+            {colors.map((color) => (
+              <button
+                key={color.class}
+                onClick={() => chooseColor(color.class)}
+                className={`w-6 h-6 rounded-full border-2 ${
+                  selectedColor === color.class
+                    ? `${color.ring} ring-1 scale-110`
+                    : "hover:scale-105"
+                } ${color.class} transition-all duration-300`}
+                title={`Set ${color.name} theme`}
+                aria-label={`${color.name} theme`}
+              />
+            ))}
+          </div>
         </div>
 
         {/* Mobile Menu Button & Color Picker */}
