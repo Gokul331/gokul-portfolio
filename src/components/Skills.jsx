@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import {
   FaReact,
   FaNodeJs,
@@ -21,18 +22,20 @@ import {
 import { DiHtml5, DiCss3, DiVisualstudio } from "react-icons/di";
 import { MdOutlineInsertChart } from "react-icons/md";
 import { colorTheme } from "../theme";
-import { color } from "framer-motion";
+import { FiAward, FiCalendar, FiUser } from "react-icons/fi";
+
 const Skills = ({ bgColor }) => {
   const [pausedCategory, setPausedCategory] = useState(null);
+  const [expandedCert, setExpandedCert] = useState(null);
   const [rotationAngles, setRotationAngles] = useState({
     Frontend: 0,
     Backend: 0,
     Tools: 0,
   });
+  const animationRefs = useRef({});
 
   useEffect(() => {
-    const animationIds = [];
-    const rotationSpeed = 0.5; // degrees per frame
+    const rotationSpeed = 0.3; // degrees per frame
 
     const animate = (timestamp, lastTimestamp, category) => {
       if (!lastTimestamp) lastTimestamp = timestamp;
@@ -45,110 +48,113 @@ const Skills = ({ bgColor }) => {
         }));
       }
 
-      animationIds[category] = requestAnimationFrame((ts) =>
+      animationRefs.current[category] = requestAnimationFrame((ts) =>
         animate(ts, timestamp, category)
       );
     };
 
     // Start animation for each category
     Object.keys(rotationAngles).forEach((category) => {
-      animationIds[category] = requestAnimationFrame((ts) =>
+      animationRefs.current[category] = requestAnimationFrame((ts) =>
         animate(ts, 0, category)
       );
     });
 
     return () => {
       // Clean up all animations
-      Object.values(animationIds).forEach((id) => cancelAnimationFrame(id));
+      Object.values(animationRefs.current).forEach((id) => cancelAnimationFrame(id));
     };
   }, [pausedCategory]);
 
   const colorThemes = colorTheme;
-
   const currentTheme = colorThemes[bgColor] || colorThemes["bg-white"];
 
   const skillCategories = [
     {
       name: "Frontend",
+      color: "from-blue-500 to-cyan-500",
       skills: [
         {
           name: "React",
-          icon: <FaReact className="text-[#61DAFB]" size={28} />,
+          icon: <FaReact className="text-[#61DAFB]" size={32} />,
+          level: 90,
         },
         {
           name: "JavaScript",
-          icon: <SiJavascript className="text-[#F7DF1E]" size={28} />,
+          icon: <SiJavascript className="text-[#F7DF1E]" size={32} />,
+          level: 85,
         },
         {
           name: "HTML5",
-          icon: <DiHtml5 className="text-[#E44D26]" size={28} />,
+          icon: <DiHtml5 className="text-[#E44D26]" size={32} />,
+          level: 95,
         },
-        { name: "CSS3", icon: <DiCss3 className="text-[#2965F1]" size={28} /> },
-        {
-          name: "TypeScript",
-          icon: <SiTypescript className="text-[#3178C6]" size={28} />,
+        { 
+          name: "CSS3", 
+          icon: <DiCss3 className="text-[#2965F1]" size={32} />,
+          level: 90,
         },
         {
           name: "Tailwind",
-          icon: <SiTailwindcss className="text-[#06B6D4]" size={28} />,
+          icon: <SiTailwindcss className="text-[#06B6D4]" size={32} />,
+          level: 88,
         },
       ],
     },
     {
       name: "Backend",
+      color: "from-green-500 to-emerald-500",
       skills: [
         {
-          name: "Node.js",
-          icon: <FaNodeJs className="text-[#68A063]" size={28} />,
-        },
-        {
           name: "Python",
-          icon: <FaPython className="text-[#3776AB]" size={28} />,
-        },
-        {
-          name: "Express",
-          icon: <SiExpress className="text-green-400" size={28} />,
+          icon: <FaPython className="text-[#3776AB]" size={32} />,
+          level: 85,
         },
         {
           name: "MongoDB",
-          icon: <SiMongodb className="text-[#47A248]" size={28} />,
+          icon: <SiMongodb className="text-[#47A248]" size={32} />,
+          level: 80,
         },
         {
           name: "MySQL",
-          icon: <SiMysql className="text-[#336791]" size={28} />,
+          icon: <SiMysql className="text-[#336791]" size={32} />,
+          level: 82,
         },
         {
           name: "Django",
-          icon: <SiDjango className="text-[#092E20]" size={28} />,
+          icon: <SiDjango className="text-[#092E20]" size={32} />,
+          level: 78,
         },
       ],
     },
     {
       name: "Tools",
+      color: "from-purple-500 to-pink-500",
       skills: [
         {
           name: "Git",
-          icon: <FaGitAlt className="text-[#F05032]" size={28} />,
-        },
-        {
-          name: "Power BI",
-          icon: <MdOutlineInsertChart className="text-[#F2C811]" size={28} />,
+          icon: <FaGitAlt className="text-[#F05032]" size={32} />,
+          level: 88,
         },
         {
           name: "VS Code",
-          icon: <DiVisualstudio className="text-[#007ACC]" size={28} />,
+          icon: <DiVisualstudio className="text-[#007ACC]" size={32} />,
+          level: 95,
         },
         {
           name: "Figma",
-          icon: <SiFigma className="text-[#F24E1E]" size={28} />,
+          icon: <SiFigma className="text-[#F24E1E]" size={32} />,
+          level: 75,
         },
         {
           name: "Postman",
-          icon: <SiPostman className="text-[#FF6C37]" size={28} />,
+          icon: <SiPostman className="text-[#FF6C37]" size={32} />,
+          level: 85,
         },
         {
-          name: "Jupyter Notebook",
-          icon: <SiJupyter className="text-[#FF0000]" size={28} />,
+          name: "Jupyter",
+          icon: <SiJupyter className="text-[#FF0000]" size={32} />,
+          level: 80,
         },
       ],
     },
@@ -160,152 +166,287 @@ const Skills = ({ bgColor }) => {
       issuer: "PEGA",
       year: "2024",
       link: "https://accounts.pega.com/profile/GOKULP16763953/share/BPEGACPSSA88V-PEGACPSSA88V1",
+      description: "Advanced certification in Pega platform design and development",
     },
     {
       name: "Pega Certified System Architect (PCSA)",
       issuer: "PEGA",
       year: "2023",
       link: "https://accounts.pega.com/profile/GOKULP16763953/share/BPEGACPSA88V1-PEGACPSA88V1",
+      description: "Foundation certification in Pega system architecture",
     },
     {
       name: "MySQL (Advanced)",
       issuer: "HackerRank",
       year: "2024",
       link: "https://www.hackerrank.com/certificates/118f1ad211db",
+      description: "Advanced MySQL database management and optimization",
     },
     {
       name: "MS Excel",
       issuer: "GUVI",
       year: "2024",
       link: "https://www.guvi.in/share-certificate/k92G12918Cu17Jl4v5",
+      description: "Advanced Excel functions and data analysis",
     },
   ];
 
+  const toggleCertExpand = (index) => {
+    setExpandedCert(expandedCert === index ? null : index);
+  };
+
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.2,
+      },
+    },
+  };
+
+  const itemVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: 0.6,
+        ease: "easeOut",
+      },
+    },
+  };
+
   return (
     <section
-      className={`py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-br ${currentTheme.gradient} transition-colors duration-500`}
+      id="skills"
+      className={`py-20 px-4 sm:px-6 lg:px-8 min-h-screen ${currentTheme.background} transition-colors duration-500`}
     >
       <div className="max-w-7xl mx-auto">
-        <h2
-          className={`text-3xl font-bold text-center ${currentTheme.textPrimary} mb-12`}
+        {/* Header */}
+        <motion.div
+          className="text-center mb-16"
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+          viewport={{ once: true }}
         >
-          Skills & Certifications
-        </h2>
+          <h2 className={`text-4xl md:text-5xl font-bold ${currentTheme.textPrimary} mb-4`}>
+            Skills & <span className={currentTheme.accentText}>Certifications</span>
+          </h2>
+          <p className={`text-lg ${currentTheme.textSecondary} max-w-2xl mx-auto`}>
+            A showcase of my technical expertise and professional certifications
+          </p>
+        </motion.div>
 
-        <div className="flex flex-wrap place-content-center gap-8">
+        {/* Skills Section */}
+        <motion.div
+          className="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-20"
+          variants={containerVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-50px" }}
+        >
           {skillCategories.map((category) => (
-            <div
+            <motion.div
               key={category.name}
-              className={`p-6 rounded-xl ${currentTheme.background} ${currentTheme.circleBorder} ${currentTheme.hover} flex flex-col items-center transition duration-500 hover:shadow-2xl hover:scale-105 border-2 `}
+              variants={itemVariants}
+              className={`relative p-8 rounded-2xl ${currentTheme.cardBg} border ${currentTheme.border} backdrop-blur-sm hover:shadow-2xl transition-all duration-500 group`}
               onMouseEnter={() => setPausedCategory(category.name)}
               onMouseLeave={() => setPausedCategory(null)}
+              whileHover={{ y: -10 }}
             >
-              <h3
-                className={`text-xl font-bold mb-12 text-center ${currentTheme.textPrimary}`}
-              >
-                {category.name}
-              </h3>
-              <div className="relative w-80 h-64 mx-auto">
-                {/* Center circle */}
-                <div
-                  className={`absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-16 h-16 flex items-center justify-center rounded-full border-2 border-dashed ${currentTheme.inner_circle} opacity-30`}
-                ></div>
+              {/* Category Header */}
+              <div className="text-center mb-12">
+                <h3 className={`text-2xl font-bold ${currentTheme.textPrimary} mb-2`}>
+                  {category.name}
+                </h3>
+                <div className={`w-20 h-1 bg-gradient-to-r ${category.color} rounded-full mx-auto`} />
+              </div>
 
-                {/* Rotating skill icons */}
+              {/* Desktop: Rotating Layout */}
+              <div className="hidden md:block relative w-full h-80 mx-auto">
+                {/* Center Circle */}
+                <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-20 h-20 flex items-center justify-center rounded-full border-2 border-dashed border-white/20 opacity-30">
+                  <div className={`w-8 h-8 rounded-full bg-gradient-to-r ${category.color} opacity-60`} />
+                </div>
+
+                {/* Rotating Skill Icons */}
                 {category.skills.map((skill, idx) => {
                   const count = category.skills.length;
                   const angle =
                     (2 * Math.PI * idx) / count +
                     (rotationAngles[category.name] * Math.PI) / 180;
-                  const radius = 110;
+                  const radius = 140;
                   const x = radius * Math.cos(angle);
                   const y = radius * Math.sin(angle);
 
                   return (
-                    <div
+                    <motion.div
                       key={skill.name}
-                      className={`absolute flex flex-col items-center justify-center w-20 h-20 ${currentTheme.circleBg} border ${currentTheme.circleBorder} rounded-full shadow transition-all duration-300 hover:scale-105 cursor-pointer`}
+                      className={`absolute flex flex-col items-center justify-center w-24 h-24 ${currentTheme.cardBg} border ${currentTheme.border} rounded-2xl shadow-lg backdrop-blur-sm cursor-pointer group/skill`}
                       style={{
-                        left: `calc(50% + ${x}px - 2.5rem)`,
-                        top: `calc(50% + ${y}px - 2.5rem)`,
+                        left: `calc(50% + ${x}px - 3rem)`,
+                        top: `calc(50% + ${y}px - 3rem)`,
                         zIndex: 10,
-                        transition:
-                          pausedCategory === category.name
-                            ? "none"
-                            : "all 0s ease-in-out",
                       }}
+                      whileHover={{ scale: 1.1, zIndex: 20 }}
+                      transition={{ type: "spring", stiffness: 300 }}
                     >
-                      <div className="mb-1">{skill.icon}</div>
-                      <span
-                        className={`text-xs text-center ${currentTheme.textPrimary}`}
-                      >
+                      <div className="mb-2 group-hover/skill:scale-110 transition-transform duration-300">
+                        {skill.icon}
+                      </div>
+                      <span className={`text-sm font-medium text-center ${currentTheme.textPrimary}`}>
                         {skill.name}
                       </span>
-                    </div>
+                      
+                      {/* Skill Level Bar */}
+                      <div className="absolute -bottom-2 left-1/2 transform -translate-x-1/2 w-16 h-1 bg-gray-300 rounded-full overflow-hidden">
+                        <motion.div
+                          className={`h-full bg-gradient-to-r ${category.color}`}
+                          initial={{ width: 0 }}
+                          whileInView={{ width: `${skill.level}%` }}
+                          transition={{ duration: 1, delay: idx * 0.1 }}
+                          viewport={{ once: true }}
+                        />
+                      </div>
+                    </motion.div>
                   );
                 })}
               </div>
-            </div>
-          ))}
-        </div>
 
-        {/* Certifications */}
-        <div
-          className={`mt-12 p-6 rounded-xl ${currentTheme.circleBg} shadow-lg`}
+              {/* Mobile: Static Grid */}
+              <div className="md:hidden grid grid-cols-2 gap-4">
+                {category.skills.map((skill, idx) => (
+                  <motion.div
+                    key={skill.name}
+                    className={`flex flex-col items-center justify-center p-4 ${currentTheme.cardBg} border ${currentTheme.border} rounded-xl shadow-sm backdrop-blur-sm`}
+                    whileHover={{ scale: 1.05 }}
+                    initial={{ opacity: 0, scale: 0.8 }}
+                    whileInView={{ opacity: 1, scale: 1 }}
+                    transition={{ delay: idx * 0.1 }}
+                    viewport={{ once: true }}
+                  >
+                    <div className="mb-2">{skill.icon}</div>
+                    <span className={`text-sm font-medium text-center ${currentTheme.textPrimary}`}>
+                      {skill.name}
+                    </span>
+                    <div className="w-full h-1 bg-gray-300 rounded-full mt-2 overflow-hidden">
+                      <motion.div
+                        className={`h-full bg-gradient-to-r ${category.color}`}
+                        initial={{ width: 0 }}
+                        whileInView={{ width: `${skill.level}%` }}
+                        transition={{ duration: 1, delay: idx * 0.1 }}
+                        viewport={{ once: true }}
+                      />
+                    </div>
+                  </motion.div>
+                ))}
+              </div>
+            </motion.div>
+          ))}
+        </motion.div>
+
+        {/* Certifications Section */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+          viewport={{ once: true }}
+          className={`p-8 rounded-2xl ${currentTheme.cardBg} border ${currentTheme.border} backdrop-blur-sm`}
         >
-          <h3
-            className={`text-xl font-bold mb-6 text-center ${currentTheme.textPrimary}`}
-          >
-            Certifications
-          </h3>
-          <ul className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div className="text-center mb-8">
+            <h3 className={`text-3xl font-bold ${currentTheme.textPrimary} mb-4 flex items-center justify-center gap-3`}>
+              <FiAward className={currentTheme.accentText} />
+              Professional Certifications
+            </h3>
+            <p className={`${currentTheme.textSecondary} max-w-2xl mx-auto`}>
+              Validating my expertise through industry-recognized certifications
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {certifications.map((cert, index) => (
-              <li
+              <motion.div
                 key={index}
-                role="listitem"
-                className={`p-4 rounded-lg border ${currentTheme.circleBorder} hover:shadow-2xl transition-shadow cursor-pointer`}
+                className={`p-6 rounded-xl border-2 transition-all duration-300 cursor-pointer ${
+                  expandedCert === index 
+                    ? `${currentTheme.accentBg} border-blue-500/50 shadow-2xl` 
+                    : `${currentTheme.cardBg} ${currentTheme.border} hover:shadow-xl`
+                }`}
                 onClick={() => toggleCertExpand(index)}
                 onKeyDown={(e) => e.key === "Enter" && toggleCertExpand(index)}
                 tabIndex="0"
+                whileHover={{ y: -5 }}
+                layout
               >
-                <div className="flex justify-between items-start">
-                  <h4
-                    className={`font-semibold ${currentTheme.textPrimary} flex-1`}
-                  >
-                    {cert.name}
-                  </h4>
-                  <a
+                <div className="flex justify-between items-start gap-4">
+                  <div className="flex-1">
+                    <h4 className={`font-bold text-lg mb-2 ${currentTheme.textPrimary}`}>
+                      {cert.name}
+                    </h4>
+                    
+                    <div className="flex items-center gap-4 text-sm mb-3">
+                      <div className="flex items-center gap-2">
+                        <FiUser className={currentTheme.textSecondary} />
+                        <span className={currentTheme.textSecondary}>{cert.issuer}</span>
+                      </div>
+                      <div className="flex items-center gap-2">
+                        <FiCalendar className={currentTheme.textSecondary} />
+                        <span className={currentTheme.textSecondary}>{cert.year}</span>
+                      </div>
+                    </div>
+
+                    <AnimatePresence>
+                      {expandedCert === index && (
+                        <motion.p
+                          initial={{ opacity: 0, height: 0 }}
+                          animate={{ opacity: 1, height: "auto" }}
+                          exit={{ opacity: 0, height: 0 }}
+                          className={`text-sm ${currentTheme.textSecondary} mb-4 leading-relaxed`}
+                        >
+                          {cert.description}
+                        </motion.p>
+                      )}
+                    </AnimatePresence>
+                  </div>
+
+                  <motion.a
                     href={cert.link}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="ml-2"
                     onClick={(e) => e.stopPropagation()}
                     aria-label={`View ${cert.name} certification`}
+                    className={`p-3 rounded-lg border ${currentTheme.border} hover:bg-white/10 transition-colors`}
+                    whileHover={{ scale: 1.1 }}
+                    whileTap={{ scale: 0.9 }}
                   >
-                    <div
-                      className={`mt-2 text-sm ${currentTheme.textSecondary}`}
-                    >
-                      <button
-                        className="mt-2 flex items-center"
-                        onClick={() => window.open(cert.link, "_blank")}
-                      >
-                        <FaExternalLinkAlt className="ml-1" />
-                      </button>
-                    </div>
-                  </a>
+                    <FaExternalLinkAlt className={currentTheme.textPrimary} />
+                  </motion.a>
                 </div>
-                <div className="flex justify-between mt-2">
-                  <span className={`text-sm ${currentTheme.textSecondary}`}>
-                    {cert.issuer}
-                  </span>
-                  <span className={`text-sm ${currentTheme.textSecondary}`}>
-                    {cert.year}
-                  </span>
+
+                {/* Expand/Collapse Indicator */}
+                <div className="flex justify-between items-center mt-4">
+                  <motion.span
+                    className={`text-xs font-medium ${
+                      expandedCert === index ? currentTheme.accentText : currentTheme.textSecondary
+                    }`}
+                    animate={{ rotate: expandedCert === index ? 180 : 0 }}
+                  >
+                    {expandedCert === index ? "Show Less" : "Show More"}
+                  </motion.span>
+                  
+                  <motion.div
+                    animate={{ rotate: expandedCert === index ? 180 : 0 }}
+                    transition={{ duration: 0.3 }}
+                  >
+                    <div className="w-2 h-2 border-r-2 border-b-2 border-current transform rotate-45" />
+                  </motion.div>
                 </div>
-              </li>
+              </motion.div>
             ))}
-          </ul>
-        </div>
+          </div>
+        </motion.div>
       </div>
     </section>
   );

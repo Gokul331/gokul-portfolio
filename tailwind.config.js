@@ -12,6 +12,10 @@ export default {
           "50%": { opacity: "0" },
         },
       },
+      screens: {
+        xs: "375px",
+        touch: { raw: "(hover: none)" },
+      },
     },
   },
   plugins: [],

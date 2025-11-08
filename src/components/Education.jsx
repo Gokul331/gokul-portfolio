@@ -75,9 +75,9 @@ const Education = ({ bgColor }) => {
         animate="visible"
         className="relative max-w-4xl mx-auto"
       >
-        {/* Timeline line */}
+        {/* Timeline line (only visible on md+) */}
         <div
-          className={`absolute left-8 top-0 h-full w-0.5 ${currentTheme.textPrimary}  transform -translate-x-1/2`}
+          className={`hidden md:block absolute left-8 top-0 h-full w-0.5 ${currentTheme.textPrimary} transform -translate-x-1/2`}
         ></div>
 
         {educationData.map((edu, index) => (
@@ -85,11 +85,11 @@ const Education = ({ bgColor }) => {
             key={index}
             variants={item}
             whileHover={{ x: 5 }}
-            className="relative pl-16 pb-10 last:pb-0 group"
+            className="relative md:pl-16 pl-4 pb-10 last:pb-0 group"
           >
-            {/* Timeline dot */}
+            {/* Timeline dot (md+ only) */}
             <div
-              className={`absolute left-8 top-0 w-4 h-4 rounded-full ${currentTheme.textAccent} border-4 ${currentTheme.dotBorder} transform -translate-x-1/2 z-10`}
+              className={`hidden md:block absolute left-8 top-0 w-4 h-4 rounded-full ${currentTheme.textAccent} border-4 ${currentTheme.dotBorder} transform -translate-x-1/2 z-10`}
             ></div>
 
             <div

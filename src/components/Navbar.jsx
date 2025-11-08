@@ -21,7 +21,6 @@ const Navbar = ({
   const colors = [
     { name: "White", class: "bg-white", ring: "ring-gray-400" },
     { name: "Black", class: "bg-black", ring: "ring-gray-300" },
-    { name: "Blue", class: "bg-sky-900", ring: "ring-blue-300" },
   ];
 
   const chooseColor = (colorClass) => {
@@ -71,7 +70,7 @@ const Navbar = ({
               {activeSection === idx && (
                 <motion.div
                   layoutId="underline"
-                  className={`absolute left-0 right-0 h-[2px] bottom-[-4px] ${currentTheme.accentBg}`}
+                  className={`absolute left-0 right-0 h-[2px] bottom-[-4px] ${currentTheme.border}`}
                 />
               )}
             </li>
@@ -137,7 +136,7 @@ const Navbar = ({
             initial={{ opacity: 0, y: -10 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -10 }}
-            className="md:hidden flex flex-col items-center gap-6 py-6 backdrop-blur-lg bg-white/30 shadow-lg"
+            className="md:hidden flex flex-col items-center gap-6 py-6 backdrop-blur-lg bg-white/30 shadow-lg w-full absolute top-full left-0"
           >
             {navLinks.map((link, idx) => (
               <li

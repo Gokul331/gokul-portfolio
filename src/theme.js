@@ -10,7 +10,7 @@ export const colorTheme = {
     button: "bg-gray-800 border text-white hover:bg-gray-100 hover:text-gray-900 hover:border-gray-800 ",
     buttonOutline: "border border-gray-800 text-gray-800 hover:bg-gray-800 hover:text-white",
     link: "text-blue-600 hover:text-blue-800",
-    cardBg: "bg-white shadow-lg",
+    cardBg: "bg-gray-200 shadow-lg",
     border: "border-gray-400 border-2",
     input:
       "bg-white border border-gray-300 text-gray-800 focus:ring-2 focus:ring-gray-500",
@@ -18,8 +18,8 @@ export const colorTheme = {
     gradient: "from-white to-gray-50",
     navBg: "bg-gray-100 shadow-xl", // default background
     navBgScrolled: "bg-white/30 shadow-lg", // background when scrolled
-    accentText: "text-blue-500", // highlight text color
-    accentBg: "bg-blue-500", // underline color
+    accentText: "text-gray-500", // highlight text color
+    accentBg: "bg-gray-300", // underline color
     overlay: "bg-white/90",
     tool: "bg-blue-100 text-blue-800",
     title: "text-gray-900",
@@ -47,7 +47,7 @@ export const colorTheme = {
     navBg: "bg-gray-900 shadow-xl",
     navBgScrolled: "bg-black/30 shadow-lg", // background when scrolled
     accentText: "text-teal-400", // highlight text color
-    accentBg: "bg-teal-400", // underline color
+    accentBg: "bg-gray-900", // underline color
     overlay: "bg-gray-900/90",
     tool: "bg-gray-700 text-gray-200",
     title: "text-white",
@@ -57,34 +57,6 @@ export const colorTheme = {
     icon: "text-white",
     inner_circle: "bg-gray-400 border-black",
   },
-  "bg-sky-900": {
-    textPrimary: "text-gray-900",
-    textSecondary: "text-gray-600",
-    textAccent: "text-yellow-300",
-    heading: "text-white font-bold",
-    paragraph: "text-blue-100 leading-relaxed",
-    button: "bg-white text-blue-900 hover:bg-blue-100",
-    buttonOutline: "border border-white text-white hover:bg-blue-800",
-    link: "text-yellow-300 hover:text-yellow-400",
-    cardBg: "bg-sky-800 shadow-lg",
-    border: "border-gray-300 border-2",
-    input:
-      "bg-sky-800 border border-gray-300 text-white focus:ring-2 focus:ring-yellow-300",
-    cursor: "bg-white",
-    gradient: "from-sky-800 to-slate-900",
-    navBg: "bg-sky-900 shadow-xl",
-    navBgScrolled: "bg-sky-900/30 shadow-lg", // background when scrolled
-    accentText: "text-yellow-400", // highlight text color
-    accentBg: "bg-yellow-400", // underline color
-    overlay: "bg-sky-900/90",
-    tool: "bg-blue-700 text-blue-100",
-    title: "text-white",
-    background: "bg-sky-900",
-    circleBg: "bg-white",
-    circleBorder: "border-gray-300 hover:border-white",
-    icon: "text-gray-600",
-    inner_circle: "bg-sky-400 border-sky-900",
-    edu_icon :"bg-yellow-300",
-  },
+ 
 
 };
