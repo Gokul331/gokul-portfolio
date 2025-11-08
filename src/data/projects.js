@@ -14,9 +14,9 @@ export const project = [
       "Responsive design for all devices"
     ],
     images: [
-      "../../public/Projects/Project1/Ecommerce1.webp",
-      "../../public/Projects/Project1/Ecommerce2.avif",
-      "../../public/Projects/Project1/Ecommerce3.jpg",
+      "/Projects/Project1/Ecommerce1.webp",
+      "/Projects/Project1/Ecommerce2.avif",
+      "/Projects/Project1/Ecommerce3.jpg",
     ],
     tools: ["React", "Node.js", "MongoDB", "Stripe", "Express.js", "JWT"],
     github: "https://github.com/Gokul331/ShopEase",
@@ -38,9 +38,9 @@ export const project = [
       "Deadline reminders & notifications"
     ],
     image: [
-      "../../public/Projects/Project2/TaskApp1.jpeg",
-      "../../public/Projects/Project2/TaskApp2.jpeg",
-      "../../public/Projects/Project2/TaskApp3.jpeg",
+      "public/Projects/Project2/TaskApp1.jpeg",
+      "public/Projects/Project2/TaskApp2.jpeg",
+      "public/Projects/Project2/TaskApp3.jpeg",
     ],
     tools: ["React", "Firebase", "Tailwind CSS", "Context API", "React DnD"],
     github: "https://github.com",
@@ -62,9 +62,9 @@ export const project = [
       "Multiple location tracking"
     ],
     image: [
-      "../../public/Projects/Project3/Weather1.jpeg",
-      "../../public/Projects/Project3/Weather2.jpeg",
-      "../../public/Projects/Project3/Weather3.jpeg",
+      "public/Projects/Project3/Weather1.jpeg",
+      "public/Projects/Project3/Weather2.jpeg",
+      "public/Projects/Project3/Weather3.jpeg",
     ],
     tools: ["JavaScript", "API Integration", "Chart.js", "Leaflet.js", "REST APIs"],
     github: "https://github.com",
@@ -86,9 +86,9 @@ export const project = [
       "Fast loading performance"
     ],
     image: [
-      "../../public/Projects/Project4/Portfolio1.avif",
-      "../../public/Projects/Project4/Portfolio2.jpeg",
-      "../../public/Projects/Project4/Portfolio3.jpeg",
+      "public/Projects/Project4/Portfolio1.avif",
+      "public/Projects/Project4/Portfolio2.jpeg",
+      "public/Projects/Project4/Portfolio3.jpeg",
     ],
     tools: ["React JS", "Tailwind CSS", "Framer Motion", "React Hook Form", "Vite"],
     github: "https://github.com/Gokul331/gokul-portfolio",
@@ -110,9 +110,9 @@ export const project = [
       "Multi-role access control"
     ],
     image: [
-      "../../public/Projects/Project5/RecipeFinder1.avif",
-      "../../public/Projects/Project5/RecipeFinder2.avif",
-      "../../public/Projects/Project5/RecipeFinder3.avif",
+      "public/Projects/Project5/RecipeFinder1.avif",
+      "public/Projects/Project5/RecipeFinder2.avif",
+      "public/Projects/Project5/RecipeFinder3.avif",
     ],
     tools: ["Pega Platform", "Java", "SQL", "Case Management"],
     github: "",
@@ -134,9 +134,9 @@ export const project = [
       "Data export capabilities"
     ],
     images: [
-      "../../public/Projects/Project6/Finance_Book1.jpg",
-      "../../public/Projects/Project6/Finance_Book2.jpg",
-      "../../public/Projects/Project6/Finance_Book3.jpeg",
+      "public/Projects/Project6/Finance_Book1.jpg",
+      "public/Projects/Project6/Finance_Book2.jpg",
+      "public/Projects/Project6/Finance_Book3.jpeg",
     ],
     tools: ["Python", "Django", "SQLlite", "Chart.js", "Bootstrap"],
     github: "https://github.com/Gokul331/Finance_App",

@@ -22,7 +22,7 @@ function useTypewriter(roles) {
     if (!isDeleting && typedRole.length < currentRole.length) {
       timeoutRef.current = setTimeout(() => {
         setTypedRole(currentRole.substring(0, typedRole.length + 1));
-        setCharIndex(prev => prev + 1);
+        setCharIndex((prev) => prev + 1);
       }, 120);
     } else if (!isDeleting && typedRole.length === currentRole.length) {
       timeoutRef.current = setTimeout(() => {
@@ -35,7 +35,7 @@ function useTypewriter(roles) {
     } else if (isDeleting && typedRole.length > 0) {
       timeoutRef.current = setTimeout(() => {
         setTypedRole(typedRole.substring(0, typedRole.length - 1));
-        setCharIndex(prev => prev - 1);
+        setCharIndex((prev) => prev - 1);
       }, 60);
     } else if (isDeleting && typedRole.length === 0) {
       setIsDeleting(false);
@@ -70,7 +70,8 @@ const Hero = ({ bgColor }) => {
 
   const colorThemes = colorTheme;
   const currentTheme = colorThemes[bgColor] || colorThemes["bg-white"];
-  const { typedRole, isDeleting, pause, currentRoleIndex, charIndex } = useTypewriter(roles);
+  const { typedRole, isDeleting, pause, currentRoleIndex, charIndex } =
+    useTypewriter(roles);
 
   // Floating animation for background elements
   const floatingVariants = {
@@ -79,25 +80,25 @@ const Hero = ({ bgColor }) => {
       transition: {
         duration: 6,
         repeat: Infinity,
-        ease: "easeInOut"
-      }
-    }
+        ease: "easeInOut",
+      },
+    },
   };
 
   // Scroll to section function
   const scrollToSection = (sectionId) => {
     const element = document.getElementById(sectionId);
     if (element) {
-      element.scrollIntoView({ 
-        behavior: 'smooth',
-        block: 'start'
+      element.scrollIntoView({
+        behavior: "smooth",
+        block: "start",
       });
     }
   };
 
   return (
     <div
-      className={`min-h-screen relative overflow-hidden bg-gradient-to-br ${currentTheme.gradient} flex items-center justify-center`}
+      className={`min-h-screen pt-20 sm:pt-16 md:pt-12 relative overflow-hidden bg-gradient-to-br ${currentTheme.gradient} flex items-center justify-center`}
       id="home"
     >
       {/* Animated Background Elements */}
@@ -111,13 +112,13 @@ const Hero = ({ bgColor }) => {
           className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-purple-300/10 rounded-full blur-3xl"
           variants={floatingVariants}
           animate="animate"
-          style={{ animationDelay: '2s' }}
+          style={{ animationDelay: "2s" }}
         />
         <motion.div
           className="absolute top-1/2 right-1/3 w-64 h-64 bg-pink-300/10 rounded-full blur-3xl"
           variants={floatingVariants}
           animate="animate"
-          style={{ animationDelay: '4s' }}
+          style={{ animationDelay: "4s" }}
         />
       </div>
 
@@ -135,9 +136,10 @@ const Hero = ({ bgColor }) => {
               initial={{ opacity: 0, x: -20 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ delay: 0.2 }}
-              
             >
-              <span className={`text-2xl sm:text-xl pl-1 font-semibold ${currentTheme.accentText}`}>
+              <span
+                className={`text-2xl sm:text-xl pl-1 font-semibold ${currentTheme.accentText}`}
+              >
                 Hello, I'm
               </span>
             </motion.div>
@@ -160,7 +162,9 @@ const Hero = ({ bgColor }) => {
               transition={{ delay: 0.5 }}
             >
               <div className="flex items-center justify-center lg:justify-start flex-wrap">
-                <span className={`text-xl sm:text-2xl lg:text-3xl font-semibold ${currentTheme.textSecondary} mr-3`}>
+                <span
+                  className={`text-xl sm:text-2xl lg:text-3xl font-semibold ${currentTheme.textSecondary} mr-3`}
+                >
                   I'm a
                 </span>
                 <div className="relative">
@@ -170,9 +174,9 @@ const Hero = ({ bgColor }) => {
                     {typedRole}
                   </span>
                   <span
-                    className={`ml-1 inline-block w-0.5 h-8 bg-gradient-to-b ${roles[currentRoleIndex].color} ${
-                      !isDeleting && !pause ? "animate-pulse" : ""
-                    }`}
+                    className={`ml-1 inline-block w-0.5 h-8 bg-gradient-to-b ${
+                      roles[currentRoleIndex].color
+                    } ${!isDeleting && !pause ? "animate-pulse" : ""}`}
                   ></span>
                 </div>
               </div>
@@ -234,10 +238,26 @@ const Hero = ({ bgColor }) => {
               transition={{ delay: 1.1 }}
             >
               {[
-                { icon: FaGithub, href: "https://github.com/Gokul331", label: "GitHub" },
-                { icon: FaLinkedin, href: "https://linkedin.com/in/gokul-palanisamy-422b6b363", label: "LinkedIn" },
-                { icon: FaEnvelope, href: "mailto:gokulece303@gmail.com", label: "Email" },
-                { icon: SiLeetcode, href: "https://www.leetcode.com/Gokul0331", label: "LeetCode" },
+                {
+                  icon: FaGithub,
+                  href: "https://github.com/Gokul331",
+                  label: "GitHub",
+                },
+                {
+                  icon: FaLinkedin,
+                  href: "https://linkedin.com/in/gokul-palanisamy-422b6b363",
+                  label: "LinkedIn",
+                },
+                {
+                  icon: FaEnvelope,
+                  href: "mailto:gokulece303@gmail.com",
+                  label: "Email",
+                },
+                {
+                  icon: SiLeetcode,
+                  href: "https://www.leetcode.com/Gokul0331",
+                  label: "LeetCode",
+                },
               ].map((social, index) => (
                 <motion.a
                   key={social.label}
@@ -275,7 +295,7 @@ const Hero = ({ bgColor }) => {
                   whileHover={{ scale: 1.02 }}
                   transition={{ type: "spring", stiffness: 300 }}
                 />
-                
+
                 {/* Gradient Overlay */}
                 <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent rounded-3xl" />
               </div>
@@ -284,7 +304,11 @@ const Hero = ({ bgColor }) => {
               <motion.div
                 className="absolute -top-4 -right-4 bg-white/10 backdrop-blur-md rounded-2xl p-4 shadow-2xl border border-white/20"
                 animate={{ y: [0, -10, 0], rotate: [0, 5, 0] }}
-                transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+                transition={{
+                  duration: 4,
+                  repeat: Infinity,
+                  ease: "easeInOut",
+                }}
               >
                 <div className="text-2xl">🚀</div>
               </motion.div>
@@ -292,7 +316,12 @@ const Hero = ({ bgColor }) => {
               <motion.div
                 className="absolute -bottom-4 -left-4 bg-white/10 backdrop-blur-md rounded-2xl p-4 shadow-2xl border border-white/20"
                 animate={{ y: [0, 10, 0], rotate: [0, -5, 0] }}
-                transition={{ duration: 4, repeat: Infinity, ease: "easeInOut", delay: 2 }}
+                transition={{
+                  duration: 4,
+                  repeat: Infinity,
+                  ease: "easeInOut",
+                  delay: 2,
+                }}
               >
                 <div className="text-2xl">💻</div>
               </motion.div>
